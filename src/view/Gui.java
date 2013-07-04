@@ -2,9 +2,10 @@ package view;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
@@ -14,26 +15,31 @@ import lib.Graph;
 import lib.Node;
 
 public class Gui {
+
+	static JComboBox start;
+	static JComboBox ziel;
+	static Object[] nodes;
+	private JFrame main_frame;
+	static Graph graph;
 	
 	public Gui(Graph graph){
 		this.graph = graph;
 	}
+
 	
-	private JFrame main_frame;
-	private Graph graph;
-	
+
 	public JFrame getMainFrame(){
 		return this.main_frame;
 	}
-	
+
 	public Graph getGraph(){
 		return this.graph;
 	}
-	
+
 	public void init() throws IOException{
-		
+
 		this.main_frame = new JFrame();
-		
+
 		JTabbedPane tabs = new JTabbedPane();
 		tabs.addTab("Locations", null, create_nodes_panel(), "Shows Locations");
 		tabs.addTab("Routes",null,create_routes_panel(), "Shows Edges");
@@ -43,9 +49,8 @@ public class Gui {
 		this.main_frame.getContentPane().add(tabs);
 		this.main_frame.setSize(800,600);
 		this.main_frame.setVisible(true);
-
 	}
-	
+
 	public JPanel create_nodes_panel(){
 		Object[][] data = new Object[this.getGraph().getNodes().size()+1][3];
 		Iterator<Node> nodes_iterator = this.getGraph().getNodes().iterator();
@@ -64,19 +69,19 @@ public class Gui {
 		String[] columnNames = {"ID","Name"};
 		
 		JTable table = new JTable(data, columnNames);
-		
+
 		JPanel content_panel = new JPanel();
 		content_panel.add(table);
 		return content_panel;
 	}
-	
+
 	public JPanel create_routes_panel(){
 		Object[][] data = new Object[this.getGraph().getEdges().size()+1][4];
 		Iterator<Edge> edges_iterator = this.getGraph().getEdges().iterator();
 		
 		Object[] header_data ={"ID","A","B","Distance"};
 		data[0] = header_data;
-				
+		
 		int counter = 1;
 		
 		while(edges_iterator.hasNext()){
@@ -85,38 +90,36 @@ public class Gui {
 			data[counter] = node_data;
 			counter++;
 		}
-		
+
 		String[] columnNames = {"ID","A","B","Distance"};
 		
-		JTable table = new JTable(data, columnNames);                                         
+		JTable table = new JTable(data, columnNames);
 		JPanel content_panel = new JPanel();
 		content_panel.add(table);
 		return content_panel;
 	}
-	
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public JPanel create_map_panel() throws IOException{
-		Iterator<Node> nodes_iterator = this.getGraph().getNodes().iterator();
 		JButton route = new JButton("Berechnen");
-		ArrayList<String> nodes = new ArrayList<String>();
-		while(nodes_iterator.hasNext()){
-			Node node = nodes_iterator.next();
-			nodes.add(node.getName());
+		nodes = new Object[this.getGraph().getNodes().size()+1];
+		nodes[0]="";
+		for (int i=1;i<this.getGraph().getNodes().size()+1;i++){
+			nodes[i]=this.getGraph().getNodes().get(i-1).getName();
 		}
 		DrawPanel map_panel = new DrawPanel();
-		JComboBox<String> start = new JComboBox<String>();
-		for (String s : nodes){
-			start.addItem(s);
-		}
+		start = new JComboBox(nodes);
+		start.setName("start");
 		start.setSelectedIndex(0);
-		JComboBox<String> ziel = new JComboBox<String>();
-		for (String s : nodes){
-			ziel.addItem(s);
-		}
+		start.addItemListener(new ComboChange());
+		ziel = new JComboBox(nodes);
 		ziel.setSelectedIndex(0);
 		File bild = new File("../Dijkstra/map_img/karte.jpg");
 		Image map = ImageIO.read(bild);
 		map_panel.setImage(map);
+		map_panel.add(new JLabel("From: "));
 		map_panel.add(start);
+		map_panel.add(new JLabel(" to Destination: "));
 		map_panel.add(ziel);
 		map_panel.add(route);
 		return map_panel;
@@ -133,5 +136,20 @@ class DrawPanel extends JPanel {
 	protected void paintComponent (Graphics g){
 		super.paintComponent(g);
 		g.drawImage(map, 0, 0, this);
+	}
+}
+
+class ComboChange implements ItemListener{
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void itemStateChanged(ItemEvent e){
+		JComboBox combo = (JComboBox)e.getSource();
+		if (combo.getName().equals("start")){
+			Gui.ziel.removeAllItems();
+			Gui.ziel.addItem("");
+			for (int i=1;i<Gui.graph.getNodes().size()+1;i++){
+				if (!combo.getSelectedItem().equals(Gui.graph.getNodes().get(i-1).getName()))
+					Gui.ziel.addItem(Gui.graph.getNodes().get(i-1).getName());
+			}
+		}
 	}
 }
