@@ -16,7 +16,9 @@ import lib.Node;
 
 public class Gui {
 
+	@SuppressWarnings("rawtypes")
 	static JComboBox start;
+	@SuppressWarnings("rawtypes")
 	static JComboBox ziel;
 	static Object[] nodes;
 	private JFrame main_frame;
@@ -47,7 +49,7 @@ public class Gui {
 		tabs.setAutoscrolls(true);
 		this.main_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.main_frame.getContentPane().add(tabs);
-		this.main_frame.setSize(800,600);
+		this.main_frame.setSize(830,680);
 		this.main_frame.setVisible(true);
 	}
 
@@ -135,7 +137,7 @@ class DrawPanel extends JPanel {
 	@Override
 	protected void paintComponent (Graphics g){
 		super.paintComponent(g);
-		g.drawImage(map, 0, 0, this);
+		g.drawImage(map, 5, 5, this);
 	}
 }
 
