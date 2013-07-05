@@ -20,6 +20,7 @@ public class ModernGui extends JFrame{
 	static Object[] nodes;
 	static Graph graph;
 	
+	
 	public ModernGui(Graph graph){
 		ModernGui.graph=graph;
 	}
