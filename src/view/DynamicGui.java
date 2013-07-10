@@ -83,11 +83,11 @@ public class DynamicGui extends JFrame{
 		DynamicGui.ziel = new JComboBox(DynamicGui.nodes);
 		DynamicGui.ziel.setSelectedIndex(0);
 		DynamicGui.route.addActionListener(new ButtonAction());
-		File bild    = new File("../Dijkstra/map_img/karte.jpg");
+		File bild    = new File("../DijkstraSeb/map_img/karte.jpg");
 		Image map = ImageIO.read(bild);
-		File noRoute = new File("../Dijkstra/map_img/noRoute.jpg");
+		File noRoute = new File("../DijkstraSeb/map_img/noRoute.jpg");
 		Image not = ImageIO.read(noRoute);
-		File pos = new File("../Dijkstra/map_img/position.gif");
+		File pos = new File("../DijkstraSeb/map_img/position.gif");
 		Image p = ImageIO.read(pos);
 		map_panel.setImage(map, not, p);
 		map_panel.add(new JLabel("From: "));
