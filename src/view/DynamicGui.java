@@ -87,7 +87,9 @@ public class DynamicGui extends JFrame{
 		Image map = ImageIO.read(bild);
 		File noRoute = new File("../Dijkstra/map_img/noRoute.jpg");
 		Image not = ImageIO.read(noRoute);
-		map_panel.setImage(map, not);
+		File pos = new File("../Dijkstra/map_img/position.gif");
+		Image p = ImageIO.read(pos);
+		map_panel.setImage(map, not, p);
 		map_panel.add(new JLabel("From: "));
 		map_panel.add(DynamicGui.start);
 		map_panel.add(new JLabel(" to Destination: "));

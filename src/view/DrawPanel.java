@@ -23,11 +23,13 @@ public class DrawPanel extends JPanel {
 	
 	private Image map;
 	private Image not;
+	private Image pos;
 	@SuppressWarnings("static-access")
-	public void setImage(Image m, Image not){
+	public void setImage(Image m, Image not, Image pos){
 		this.map = m;
 		this.not = not;
-		this.xAxe = Toolkit.getDefaultToolkit().getScreenSize().width/4;
+		this.pos = pos;
+		this.xAxe = (Toolkit.getDefaultToolkit().getScreenSize().width-m.getWidth(this))/2;
 	}
 	
 	@SuppressWarnings("static-access")
@@ -36,6 +38,8 @@ public class DrawPanel extends JPanel {
 		System.out.println("jab:" + DynamicGui.start.getSelectedItem().toString() + " und " + DynamicGui.ziel.getSelectedItem().toString());
 		super.paintComponent(g);
 		g.drawImage(map, this.xAxe, 5, this);
+		Node temp=null;
+		int i=0;
 		if (!DynamicGui.start.getSelectedItem().toString().equals("") &&
 				!DynamicGui.ziel.getSelectedItem().toString().equals("")){
 			this.path = DijkstraAlgorithm.calcPath
@@ -46,11 +50,15 @@ public class DrawPanel extends JPanel {
 				for (Node node : this.path){
 					int x = node.getPosition_x();
 					int y = node.getPosition_y();
-					g.drawRoundRect(x, y, 4, 4, 1, 1);
+					g.drawImage(pos, x, y, this);
+					if (i>0) g.drawLine(x+13, y+40, temp.getPosition_x()+13, temp.getPosition_y()+40);
+					temp=node;
+					i++;
 				}
 			}catch (NullPointerException e){
-				g.drawImage(not, this.xAxe,
-						(int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()/4), this);
+				g.drawImage(not,
+						(int)((Toolkit.getDefaultToolkit().getScreenSize().getWidth()-not.getWidth(this))/2),
+						(int)((Toolkit.getDefaultToolkit().getScreenSize().getHeight()-not.getHeight(this))/2), this);
 			}
 		}
 	}

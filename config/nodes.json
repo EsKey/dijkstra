@@ -1,10 +1,11 @@
 [
-	{id: 1, name: "Aachen", position_x: 100, position_y: 200},
-	{id: 2, name: "London", position_x: 50, position_y: 100},
+	{id: 1, name: "Aachen", position_x: 610, position_y: 200},
+	{id: 2, name: "London", position_x: 510, position_y: 175},
 	{id: 3, name: "Amsterdam", position_x: 100, position_y: 100},
-	{id: 4, name: "Berlin", positon_x: 300, position_y: 200},
+	{id: 4, name: "Berlin", position_x: 727, position_y: 160},
 	{id: 5, name: "Wien", position_x: 400, position_y: 300},
 	{id: 6, name: "Muenchen", position_x: 300, position_y: 250},
 	{id: 7, name: "Hamburg", position_x: 100, position_y: 150},
-	{id: 8, name: "Paris", position_x: 200, position_y: 250}
+	{id: 8, name: "Paris", position_x: 540, position_y: 245},
+	{id: 9, name: "Rom", position_x: 100, position_y: 100}
 ]

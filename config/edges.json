@@ -3,5 +3,9 @@
 	{a_id: 2, b_id: 1, distance: 200},
 	{a_id: 3, b_id: 2, distance: 100},
 	{a_id: 5, b_id: 6, distance: 200},
-	{a_id: 1, b_id: 6, distance: 500}
+	{a_id: 1, b_id: 6, distance: 500},
+	{a_id: 4, b_id: 8, distance: 500},
+	{a_id: 8, b_id: 4, distance: 500},
+	{a_id: 9, b_id: 8, distance: 500},
+	{a_id: 8, b_id: 9, distance: 500}
 ]
