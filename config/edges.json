@@ -1,0 +1,7 @@
+[
+	{a_id: 1, b_id: 2, distance: 200},
+	{a_id: 2, b_id: 1, distance: 200},
+	{a_id: 3, b_id: 2, distance: 100},
+	{a_id: 5, b_id: 6, distance: 200},
+	{a_id: 1, b_id: 6, distance: 500}
+]
