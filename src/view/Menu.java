@@ -51,7 +51,6 @@ class Aktionen extends AbstractAction{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		JMenuItem sub = (JMenuItem)e.getSource();
 		if (sub.getName().equals("Beenden")){
 			System.exit(0);
@@ -66,7 +65,6 @@ class Aktionen extends AbstractAction{
 			try {
 				show_nodes.setSelected(true);
 			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -80,7 +78,6 @@ class Aktionen extends AbstractAction{
 			try {
 				show_routes.setSelected(true);
 			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}

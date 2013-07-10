@@ -1,13 +1,11 @@
 package bin;
 
-
+import java.beans.PropertyVetoException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedList;
 
 import view.DynamicGui;
-
 import lib.*;
 
 public class main {
@@ -15,40 +13,25 @@ public class main {
 	/**
 	 * @param args
 	 * @throws IOException 
+	 * @throws PropertyVetoException 
 	 */
-	public static void main(String[] args) throws IOException {
 		
-		Node london = new Node("London");
-		Node berlin = new Node("Berlin");
-		Node wien = new Node("Wien");
-		Node rom = new Node("Rom");
-		Node paris = new Node(4, "Paris");
+	public static void main(String[] args) throws IOException, PropertyVetoException{
 		
-		List<Node> nodes = new ArrayList<Node>();
-		nodes.add(london);
-		nodes.add(berlin);
-		nodes.add(wien);
-		nodes.add(rom);
-		nodes.add(paris);
+		Node[] json_nodes = Node.getNodesFromJson("config/nodes.json");
 		
-		List<Edge> edges = new ArrayList<Edge>();
-		edges.add(new Edge(london,berlin,100));
-		edges.add(new Edge(berlin,wien,200));
-		edges.add(new Edge(rom,paris,500));
+		Edge[] json_edges = Edge.getEdgesFromJson("config/edges.json");
 		
-		Graph graph = new Graph(nodes,edges);
-		
-		Iterator<Edge> edges_iterator = graph.getEdges().iterator();
-		
-		while(edges_iterator.hasNext()){
-			Edge edge = edges_iterator.next();
-			System.out.println("From "+edge.getA().getName()+" to "+edge.getB().getName()+ " distance "+edge.getDistance());
-		}
-		
-		//Gui gui = new Gui(graph);
+		Graph graph = new Graph(json_nodes,json_edges);	
+
 		DynamicGui gui = new DynamicGui(graph);
 		gui.init();
-		
+//		LinkedList <Node>path = DijkstraAlgorithm.calcPath(graph.getNode(3), graph.getNode(1), graph);
+//		
+//		Iterator <Node>pathiterator = path.iterator();
+//		while(pathiterator.hasNext()){
+//			System.out.println(pathiterator.next().getName());
+//		}
 	}
 
 }
