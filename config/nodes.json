@@ -1,11 +1,11 @@
 [
-	{id: 1, name: "Aachen", position_x: 610, position_y: 200},
-	{id: 2, name: "London", position_x: 510, position_y: 175},
-	{id: 3, name: "Amsterdam", position_x: 593, position_y: 160},
-	{id: 4, name: "Berlin", position_x: 727, position_y: 160},
-	{id: 5, name: "Wien", position_x: 785, position_y: 267},
-	{id: 6, name: "Muenchen", position_x: 700, position_y: 270},
-	{id: 7, name: "Hamburg", position_x: 100, position_y: 150},
-	{id: 8, name: "Paris", position_x: 540, position_y: 245},
-	{id: 9, name: "Rom", position_x: 726, position_y: 438}
+	{id: 1, name: "Aachen", position_x: 610, position_y: 250},
+	{id: 2, name: "London", position_x: 510, position_y: 225},
+	{id: 3, name: "Amsterdam", position_x: 593, position_y: 210},
+	{id: 4, name: "Berlin", position_x: 727, position_y: 210},
+	{id: 5, name: "Wien", position_x: 785, position_y: 317},
+	{id: 6, name: "Muenchen", position_x: 700, position_y: 320},
+	{id: 7, name: "Hamburg", position_x: 100, position_y: 200},
+	{id: 8, name: "Paris", position_x: 540, position_y: 295},
+	{id: 9, name: "Rom", position_x: 726, position_y: 488}
 ]

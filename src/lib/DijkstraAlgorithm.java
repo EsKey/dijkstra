@@ -60,7 +60,7 @@ public class DijkstraAlgorithm {
 
   }
 
-  private int getDistance(Node node, Node target) {
+  public int getDistance(Node node, Node target) {
 
     for (Edge edge : edges) {
       if ((edge.getA().equals(node) || edge.getB().equals(node)) && (edge.getA().equals(target) || edge.getB().equals(target)) ) {

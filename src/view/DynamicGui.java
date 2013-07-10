@@ -3,6 +3,7 @@
  */
 package view;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -38,6 +39,7 @@ public class DynamicGui extends JFrame{
 	static DrawPanel temp;
 	static JInternalFrame show_map;
 	static JButton route = new JButton("Route");
+	static JLabel distance = new JLabel();
 	static DynamicGui main;
 	
 	
@@ -87,14 +89,24 @@ public class DynamicGui extends JFrame{
 		Image map = ImageIO.read(bild);
 		File noRoute = new File("../DijkstraSeb/map_img/noRoute.jpg");
 		Image not = ImageIO.read(noRoute);
-		File pos = new File("../DijkstraSeb/map_img/position.gif");
-		Image p = ImageIO.read(pos);
-		map_panel.setImage(map, not, p);
-		map_panel.add(new JLabel("From: "));
+//		File[] pfeile = new File[3];
+//		pfeile[0] = new File("../DijkstraSeb/map_img/pfeilStart.gif");
+//		Image start = ImageIO.read(pfeile[0]);
+//		pfeile[1] = new File("../DijkstraSeb/map_img/pfeilZwischen.gif");
+//		Image zwischen = ImageIO.read(pfeile[1]);
+//		pfeile[2] = new File("../DijkstraSeb/map_img/pfeilZiel.gif");		
+//		Image ziel = ImageIO.read(pfeile[2]);
+		File position = new File("../DijkstraSeb/map_img/position.gif");
+		Image pos = ImageIO.read(position);
+		map_panel.setImage(map, not, pos);
+		DynamicGui.start.setBackground(Color.ORANGE);
+		DynamicGui.ziel.setBackground(Color.GREEN);
 		map_panel.add(DynamicGui.start);
-		map_panel.add(new JLabel(" to Destination: "));
+		map_panel.add(new JLabel("  =====> "));
 		map_panel.add(DynamicGui.ziel);
 		map_panel.add(route);
+		map_panel.add(new JLabel("   Distance: "));
+		map_panel.add(distance);
 		return map_panel;
 	}	
 }

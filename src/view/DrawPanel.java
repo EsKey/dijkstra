@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -21,12 +24,21 @@ public class DrawPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private static int xAxe;
 	private static LinkedList<Node> path;
-	
+	private static DijkstraAlgorithm da;
 	private Image map;
 	private Image not;
 	private Image pos;
+	private Image start;
+	private Image zwischen;
+	private Image ziel;
+	
+	
 	@SuppressWarnings("static-access")
-	public void setImage(Image m, Image not, Image pos){
+	public void setImage(Image m, Image not, Image pos) throws IOException{
+//		this.start = ImageIO.read(pfeile[0]);
+//		this.zwischen = ImageIO.read(pfeile[1]);
+//		this.ziel = ImageIO.read(pfeile[2]);
+		this.da = new DijkstraAlgorithm(DynamicGui.graph);
 		this.map = m;
 		this.not = not;
 		this.pos = pos;
@@ -38,9 +50,11 @@ public class DrawPanel extends JPanel {
 	protected void paintComponent (Graphics g){
 		System.out.println("jab:" + DynamicGui.start.getSelectedItem().toString() + " und " + DynamicGui.ziel.getSelectedItem().toString());
 		super.paintComponent(g);
-		g.drawImage(map, this.xAxe, 5, this);
+		g.drawImage(map, this.xAxe, 55, this);
 		Node temp=null;
+		int sum=0;
 		int i=0;
+		int x = 0, y=0;
 		if (!DynamicGui.start.getSelectedItem().toString().equals("") &&
 				!DynamicGui.ziel.getSelectedItem().toString().equals("")){
 			this.path = DijkstraAlgorithm.calcPath
@@ -48,12 +62,16 @@ public class DrawPanel extends JPanel {
 					 DynamicGui.graph.getNode(getNodeId(DynamicGui.ziel.getSelectedItem().toString())),
 					 DynamicGui.graph);
 			try{
+				
 				for (Node node : this.path){
-					int x = node.getPosition_x();
-					int y = node.getPosition_y();
-					g.drawImage(pos, x, y, this);
+					x = node.getPosition_x();
+					y = node.getPosition_y();
 					g.setColor(Color.MAGENTA);
-					if (i>0) g.drawLine(x+13, y+40, temp.getPosition_x()+13, temp.getPosition_y()+40);
+					if (i>0) {
+						g.drawLine(x+13, y+43, temp.getPosition_x()+13, temp.getPosition_y()+43);
+						sum+=da.getDistance(temp, node);
+					}
+					g.drawImage(pos, x, y, this);
 					temp=node;
 					i++;
 				}
@@ -63,6 +81,7 @@ public class DrawPanel extends JPanel {
 						(int)((Toolkit.getDefaultToolkit().getScreenSize().getHeight()-not.getHeight(this))/2), this);
 			}
 		}
+		DynamicGui.distance.setText(String.valueOf(sum) + " km");
 	}
 	
 	public int getNodeId(String node){
