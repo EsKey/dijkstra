@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -51,6 +52,7 @@ public class DrawPanel extends JPanel {
 					int x = node.getPosition_x();
 					int y = node.getPosition_y();
 					g.drawImage(pos, x, y, this);
+					g.setColor(Color.MAGENTA);
 					if (i>0) g.drawLine(x+13, y+40, temp.getPosition_x()+13, temp.getPosition_y()+40);
 					temp=node;
 					i++;
@@ -65,7 +67,7 @@ public class DrawPanel extends JPanel {
 	
 	public int getNodeId(String node){
 		int id=0;
-		for(int i=1;i<DynamicGui.graph.getNodes().size();i++){
+		for(int i=1;i<=DynamicGui.graph.getNodes().size();i++){
 			System.out.println(i + ":" );
 			if (DynamicGui.graph.getNode(i).getName().equals(node)){
 				id = DynamicGui.graph.getNode(i).getId();

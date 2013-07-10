@@ -62,7 +62,7 @@ public class DynamicGui extends JFrame{
 		show_map.setSize(this.getSize());
 		show_map.add(create_map_panel());
 		show_map.setVisible(true);
-//		show_map.addMouseListener(new MouseAction());
+		show_map.addMouseListener(new MouseAction());
 		desktop.add(show_map);
 		desktop.setVisible(true);
 		this.add(desktop);
@@ -128,7 +128,11 @@ class MouseAction implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		//DynamicGui.show_map.repaint();
+		if (e.getClickCount()==2){
+			DynamicGui.start.setSelectedIndex(0);
+			DynamicGui.ziel.setSelectedIndex(0);
+			DynamicGui.show_map.repaint();
+		}
 	}
 
 	@Override
